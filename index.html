@@ -3,9 +3,120 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Retro-Neon Tic Tac Toe</title>
+    <!-- Google Fonts for premium typography -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&family=Syne:wght@700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    
+    <!-- Confetti canvas overlay -->
+    <canvas id="confetti-canvas"></canvas>
+
+    <!-- Main Glassmorphic Container -->
+    <main class="game-container">
+        <!-- Title Header -->
+        <header class="game-header">
+            <h1 class="glow-title">NEON TOES</h1>
+            <p class="subtitle">Tic Tac Toe Reimagined</p>
+        </header>
+
+        <!-- Configuration Section -->
+        <section class="config-panel">
+            <div class="mode-selector">
+                <button id="mode-pvp" class="btn-tab active" data-mode="pvp">
+                    <svg class="btn-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2" />
+                        <circle cx="9" cy="7" r="4" />
+                        <path d="M23 21v-2a4 4 0 0 0-3-3.87" />
+                        <path d="M16 3.13a4 4 0 0 1 0 7.75" />
+                    </svg>
+                    2 Players
+                </button>
+                <button id="mode-ai" class="btn-tab" data-mode="ai">
+                    <svg class="btn-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <rect x="2" y="3" width="20" height="14" rx="2" ry="2" />
+                        <line x1="8" y1="21" x2="16" y2="21" />
+                        <line x1="12" y1="17" x2="12" y2="21" />
+                    </svg>
+                    vs Computer
+                </button>
+            </div>
+
+            <!-- Difficulty Settings (Shown only in AI mode) -->
+            <div id="ai-difficulty-container" class="difficulty-container hidden">
+                <span class="difficulty-label">Difficulty:</span>
+                <div class="difficulty-selector">
+                    <button class="btn-diff active" data-diff="easy">Easy</button>
+                    <button class="btn-diff" data-diff="medium">Medium</button>
+                    <button class="btn-diff" data-diff="impossible">Impossible</button>
+                </div>
+            </div>
+        </section>
+
+        <!-- Scoreboard -->
+        <section class="scoreboard">
+            <div class="score-card player-x-card active-turn" id="card-x">
+                <span class="player-name">Player X</span>
+                <span class="player-score" id="score-x">0</span>
+            </div>
+            <div class="score-card draw-card">
+                <span class="player-name">Draws</span>
+                <span class="player-score" id="score-draw">0</span>
+            </div>
+            <div class="score-card player-o-card" id="card-o">
+                <span class="player-name" id="name-o">Player O</span>
+                <span class="player-score" id="score-o">0</span>
+            </div>
+        </section>
+
+        <!-- Game Board Grid -->
+        <section class="board-container">
+            <div class="grid-board" id="game-board">
+                <!-- 9 grid cells -->
+                <div class="grid-cell" data-index="0"></div>
+                <div class="grid-cell" data-index="1"></div>
+                <div class="grid-cell" data-index="2"></div>
+                <div class="grid-cell" data-index="3"></div>
+                <div class="grid-cell" data-index="4"></div>
+                <div class="grid-cell" data-index="5"></div>
+                <div class="grid-cell" data-index="6"></div>
+                <div class="grid-cell" data-index="7"></div>
+                <div class="grid-cell" data-index="8"></div>
+            </div>
+        </section>
+
+        <!-- Bottom Controls -->
+        <footer class="game-controls">
+            <button id="btn-sound" class="btn-circle" title="Toggle Sound">
+                <!-- Sound On Icon (Default) -->
+                <svg id="sound-on-icon" class="control-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5" />
+                    <path d="M19.07 4.93a10 10 0 0 1 0 14.14M15.54 8.46a5 5 0 0 1 0 7.07" />
+                </svg>
+                <!-- Sound Off Icon (Hidden) -->
+                <svg id="sound-off-icon" class="control-icon hidden" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5" />
+                    <line x1="23" y1="9" x2="17" y2="15" />
+                    <line x1="17" y1="9" x2="23" y2="15" />
+                </svg>
+            </button>
+            <button id="btn-reset-scores" class="btn-rect">Reset Scores</button>
+            <button id="btn-restart" class="btn-rect btn-primary">Restart Game</button>
+        </footer>
+    </main>
+
+    <!-- Overlay Screen for Game Over -->
+    <div id="overlay-screen" class="overlay hidden">
+        <div class="overlay-card">
+            <h2 id="overlay-result-text">PLAYER X WINS!</h2>
+            <p id="overlay-subtext">A glorious victory</p>
+            <button id="btn-overlay-close" class="btn-rect btn-primary btn-large">Play Again</button>
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="script.js"></script>
 </body>
 </html>
